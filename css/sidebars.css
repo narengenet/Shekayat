@@ -1,0 +1,264 @@
+﻿@font-face {
+    font-family: "IranSans";
+    src: url("fonts/IRANSansWeb.woff2") format("woff2"), url("fonts/IRANSansWeb.woff") format("woff"),url("fonts/IRANSansWeb.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "IranSans";
+    src: url("fonts/IRANSansWeb_Bold.woff2") format("woff2"), url("fonts/IRANSansWeb_Bold.woff") format("woff"),url("fonts/IRANSansWeb_Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    font-family: IranSans;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+main {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width:100%;
+    width:100%;
+}
+
+.b-example-divider {
+    flex-shrink: 0;
+    width: 1%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.bi {
+    vertical-align: -.125em;
+    pointer-events: none;
+    fill: currentColor;
+}
+
+.dropdown-toggle {
+    outline: 0;
+}
+
+.nav-flush .nav-link {
+    border-radius: 0;
+}
+
+.btn-toggle {
+    display: inline-flex;
+    align-items: center;
+    padding: .25rem .5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .65);
+    background-color: transparent;
+    border: 0;
+}
+
+    .btn-toggle:hover,
+    .btn-toggle:focus {
+        color: rgba(0, 0, 0, .85);
+        background-color: #d2f4ea;
+    }
+
+    .btn-toggle::before {
+        width: 1.25em;
+        line-height: 0;
+        content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+        transition: transform .35s ease;
+        transform-origin: .5em 50%;
+    }
+
+    .btn-toggle[aria-expanded="true"] {
+        color: rgba(0, 0, 0, .85);
+    }
+
+        .btn-toggle[aria-expanded="true"]::before {
+            transform: rotate(90deg);
+        }
+
+.btn-toggle-nav a {
+    display: inline-flex;
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: 1.25rem;
+    text-decoration: none;
+}
+
+    .btn-toggle-nav a:hover,
+    .btn-toggle-nav a:focus {
+        background-color: #d2f4ea;
+    }
+
+.scrollarea {
+    overflow-y: auto;
+}
+
+.fw-semibold {
+    font-weight: 600;
+}
+
+.lh-tight {
+    line-height: 1.25;
+}
+
+
+tr input[type=image]{
+    position:relative;
+    top:3px;
+}
+
+/*#editCategoriesContainer{
+    display:none;
+}*/
+th a,td{
+    font-size:0.8rem;
+}
+.bold-smal-text{
+    font-size:0.8rem;
+    font-weight:bold;
+}
+    .bold-smal-text option {
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius:50%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: darkblue;
+    border: 4px solid transparent;
+    border-radius: 10px;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+
+.btn-excel{
+    background-image:url(../img/excel.png);
+    width:200px;
+    height:200px;
+    background-size:cover;
+}
+.text-left-aligned{
+    text-align:left;
+}
+.inline-block{
+    display:inline-block;
+}
+.inline-48 {
+    display: inline-block;
+    width: 48%;
+}
+.grid-data th {
+    font-size: 0.8rem;
+}
+.hidden-input{
+    display:none;
+}
+.upload-label{
+    border:1px solid black;
+    padding:5px;
+    border-radius:5px;
+    cursor:pointer;
+}
+.upload-label-label {
+    margin-left: 2rem;
+}
+.form-label img{
+    width:100%;
+}
+.print-icon{
+    cursor:pointer;
+}
+.subject-header{
+    padding: 0.2rem 0.4rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin:auto;
+    border:1px solid black;
+    border-radius:5px;
+    width:auto;
+    background-color:wheat;
+}
+.subject-parent{
+    text-align:center;
+    margin-bottom:1rem;
+}
+.chat-back.container{
+    padding-top:1rem;
+}
+.head-part{
+    height:500px;
+    max-height:500px;
+}
+.form-label{
+    font-size:0.8rem!important;
+}
+
+
+th{
+    font-size:0.6rem!important;
+}
+.btn-export {
+    width: 27px;
+    height: 27px;
+    background-size: cover;
+    background-color: none;
+    filter: grayscale(50%);
+    border: none;
+    margin-top: 3px;
+    margin-right: 10px;
+}
+
+    .btn-export:hover {
+        filter: grayscale(0%);
+    }
+
+.btn-excel {
+    background-image: url(../img/excel.png);
+}
+.btn-chrt {
+    background-image: url(../img/chart.png);
+    cursor:pointer;
+}
+.clientthreads-lnk {
+    font-size: 0.8rem !important;
+}
+.dashboard-data {
+    font-size: 0.8rem !important;
+}
+    .dashboard-data .d-flex {
+        justify-content: center;
+        align-items: center;
+    }

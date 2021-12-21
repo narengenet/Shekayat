@@ -1,0 +1,101 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Shekayat.Site1" %>
+
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="<%= ResolveUrl("~/css/bootstrap.rtl.min.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/css/jquery-ui.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/css/style.css") %>" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/css/onlinewebfonts.css") %>" rel="stylesheet" />
+    <script src="<%= ResolveUrl("~/js/jquery-3.6.0.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/js/jquery-ui.min.js") %>"></script>
+    <script src="<%= ResolveUrl("~/js/bootstrap.bundle.min.js") %>"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="text-white"></h4>
+                        <a href="/" target="_blank" class="text-muted">صفحه اصلی سامانه شکایات مردمی</a>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="text-white">لینک های مفید</h4>
+                        <ul class="list-unstyled">
+                            <li><a target="_blank" href="http://roostaa.ir" class="text-white">وب سایت صندوق بیمه اجتماعی کشاورزان روستاییان و عشایر</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container">
+                <a href="#" class="navbar-brand d-flex align-items-center">
+                    <img src="img/logo.png" style="width:5rem;" />
+                    <strong style="margin-right:10px;">سامانه شکایات مردمی</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="تبديل التنقل">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <form id="form1" runat="server">
+        <main class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+    </form>
+
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <footer class="text-muted py-5 border-top m-5">
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">برو بالا</a>
+            </p>
+            <p class="mb-1">این سامانه توسط دفتر مدیرعامل صندوق مدیریت میشود. </p>
+            <p class="mb-0">
+                کلیه حقوق این سامانه متعلق به 
+                <a href="http://roostaa.ir">صندوق بیمه اجتماعی کشاورزان، روستاییان و عشایر</a> است.
+
+            </p>
+        </div>
+    </footer>
+    <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img id="toastimg" src="" class="rounded me-2" alt="">
+                <strong class="me-auto" id="toasttitle"></strong>
+                <small id="toasttime"></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastbody">
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Read a page's GET URL variables and return them as an associative array.
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+    </script>
+</body>
+</html>

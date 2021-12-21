@@ -1,0 +1,413 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7534AF58-4965-444A-BCE2-3465C30F61B4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shekayat</RootNamespace>
+    <AssemblyName>Shekayat</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44366</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PersianCalendar">
+      <HintPath>..\..\PersianCalender-www.projectp30.ir\PsCalendar\PersianCalendar\bin\PersianCalendar.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin\admins.aspx" />
+    <Content Include="admin\categories.aspx" />
+    <Content Include="admin\clientthreads.aspx" />
+    <Content Include="admin\dashboard.aspx" />
+    <Content Include="admin\editadmin.aspx" />
+    <Content Include="admin\files\2021\11\صفحه-تعاملی.png" />
+    <Content Include="admin\files\2021\11\پدافند.jpg" />
+    <Content Include="admin\llogout.aspx" />
+    <Content Include="admin\logout.aspx" />
+    <Content Include="admin\PrintForm.aspx" />
+    <Content Include="admin\rates.aspx" />
+    <Content Include="admin\thelogs.aspx" />
+    <Content Include="css\bootstrap.rtl.min.css" />
+    <Content Include="css\calendar.css" />
+    <Content Include="css\fonts\onlinewebfonts.svg" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="css\onlinewebfonts.css" />
+    <Content Include="css\sidebars.css" />
+    <Content Include="css\style.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="discontentresult.aspx" />
+    <Content Include="discontents.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="img\04.jpg" />
+    <Content Include="img\admin-icon.png" />
+    <Content Include="img\admin-svgrepo-com.svg" />
+    <Content Include="img\calendar.JPG" />
+    <Content Include="img\chart.png" />
+    <Content Include="img\chat-background.jpg" />
+    <Content Include="img\chat-background.png" />
+    <Content Include="img\complaint_record.png" />
+    <Content Include="img\excel.png" />
+    <Content Include="img\excellll.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\new_complaint.png" />
+    <Content Include="img\pdf.png" />
+    <Content Include="img\print.png" />
+    <Content Include="img\select.png" />
+    <Content Include="img\selected.png" />
+    <Content Include="img\sina.jpg" />
+    <Content Include="img\sina.png" />
+    <Content Include="img\sms-icon.png" />
+    <Content Include="js\app.js" />
+    <Content Include="js\autofile.js" />
+    <Content Include="js\bootstrap.bundle.min.js" />
+    <Content Include="js\jquery-3.6.0.min.js" />
+    <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\jquery.canvasjs.min.js" />
+    <Content Include="js\JsFarsiCalendar.js" />
+    <Content Include="js\recorder.js" />
+    <Content Include="js\sidebars.js" />
+    <Content Include="loginxyzroosta.aspx" />
+    <Content Include="newdiscontent.aspx" />
+    <Content Include="sounds\2021\9\1-23_0.wav" />
+    <Content Include="sounds\2021\9\1-26_0.wav" />
+    <Content Include="sounds\2021\9\1-41_0.wav" />
+    <Content Include="sounds\2021\9\1-43_0.wav" />
+    <Content Include="sounds\2021\9\1-45_0.wav" />
+    <Content Include="sounds\2021\9\1-49_0.wav" />
+    <Content Include="sounds\2021\9\1-50_0.wav" />
+    <Content Include="sounds\2021\9\1-51_0.wav" />
+    <Content Include="sounds\2021\9\10-56_0.wav" />
+    <Content Include="sounds\2021\9\11-57_0.wav" />
+    <Content Include="sounds\2021\9\11-58_0.wav" />
+    <Content Include="sounds\2021\9\11-60_0.wav" />
+    <Content Include="sounds\2021\9\12-1_0.wav" />
+    <Content Include="sounds\2021\9\12-61_0.wav" />
+    <Content Include="sounds\2021\9\12-65_0.wav" />
+    <Content Include="sounds\2021\9\12-72_0.wav" />
+    <Content Include="sounds\2021\9\12-75_0.wav" />
+    <Content Include="sounds\2021\9\12-79_0.wav" />
+    <Content Include="sounds\2021\9\13-63_0.wav" />
+    <Content Include="sounds\2021\9\15-76_0.wav" />
+    <Content Include="thread.aspx" />
+    <Content Include="upload.aspx" />
+    <Content Include="uploadfile.aspx" />
+    <Content Include="verifier.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="adminpages.Master.cs">
+      <DependentUpon>adminpages.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminpages.Master.designer.cs">
+      <DependentUpon>adminpages.Master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\admins.aspx.cs">
+      <DependentUpon>admins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\admins.aspx.designer.cs">
+      <DependentUpon>admins.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\categories.aspx.cs">
+      <DependentUpon>categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\categories.aspx.designer.cs">
+      <DependentUpon>categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\clientthreads.aspx.cs">
+      <DependentUpon>clientthreads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\clientthreads.aspx.designer.cs">
+      <DependentUpon>clientthreads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\editadmin.aspx.cs">
+      <DependentUpon>editadmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\editadmin.aspx.designer.cs">
+      <DependentUpon>editadmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\llogout.aspx.cs">
+      <DependentUpon>llogout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\llogout.aspx.designer.cs">
+      <DependentUpon>llogout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\PrintForm.aspx.cs">
+      <DependentUpon>PrintForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\PrintForm.aspx.designer.cs">
+      <DependentUpon>PrintForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\rates.aspx.cs">
+      <DependentUpon>rates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\rates.aspx.designer.cs">
+      <DependentUpon>rates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\thelogs.aspx.cs">
+      <DependentUpon>thelogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\thelogs.aspx.designer.cs">
+      <DependentUpon>thelogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="controllers\logs.cs" />
+    <Compile Include="controllers\PermissionChecks.cs" />
+    <Compile Include="controllers\SessionHelpers.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="discontentresult.aspx.cs">
+      <DependentUpon>discontentresult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="discontentresult.aspx.designer.cs">
+      <DependentUpon>discontentresult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="discontents.aspx.cs">
+      <DependentUpon>discontents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="discontents.aspx.designer.cs">
+      <DependentUpon>discontents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="handlers\deleteAdmin.ashx.cs">
+      <DependentUpon>deleteAdmin.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="handlers\deleteDepartment.ashx.cs">
+      <DependentUpon>deleteDepartment.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="handlers\deletePost.ashx.cs">
+      <DependentUpon>deletePost.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="handlers\deleteThread.ashx.cs">
+      <DependentUpon>deleteThread.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="loginxyzroosta.aspx.cs">
+      <DependentUpon>loginxyzroosta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="loginxyzroosta.aspx.designer.cs">
+      <DependentUpon>loginxyzroosta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="newdiscontent.aspx.cs">
+      <DependentUpon>newdiscontent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="newdiscontent.aspx.designer.cs">
+      <DependentUpon>newdiscontent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersianCulture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rates.ashx.cs">
+      <DependentUpon>rates.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Shekayat.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shekayat.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="thread.aspx.cs">
+      <DependentUpon>thread.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="thread.aspx.designer.cs">
+      <DependentUpon>thread.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="upload.aspx.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="upload.aspx.designer.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="uploadfile.aspx.cs">
+      <DependentUpon>uploadfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="uploadfile.aspx.designer.cs">
+      <DependentUpon>uploadfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="verifier.aspx.cs">
+      <DependentUpon>verifier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="verifier.aspx.designer.cs">
+      <DependentUpon>verifier.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\fonts\onlinewebfonts.eot" />
+    <Content Include="css\fonts\onlinewebfonts.ttf" />
+    <Content Include="css\fonts\onlinewebfonts.woff" />
+    <Content Include="css\fonts\onlinewebfonts.woff2" />
+    <Content Include="adminpages.Master" />
+    <Content Include="handlers\deleteAdmin.ashx" />
+    <Content Include="handlers\deleteThread.ashx" />
+    <Content Include="handlers\deleteDepartment.ashx" />
+    <Content Include="handlers\deletePost.ashx" />
+    <Content Include="css\fonts\IRANSansWeb.ttf" />
+    <Content Include="css\fonts\IRANSansWeb.woff" />
+    <Content Include="css\fonts\IRANSansWeb_Bold.ttf" />
+    <Content Include="css\fonts\IRANSansWeb_Bold.woff" />
+    <Content Include="css\fonts\IRANSansWeb.woff2" />
+    <Content Include="css\fonts\IRANSansWeb_Bold.woff2" />
+    <Content Include="admin\files\2021\11\Vithal_Wadje.pdf" />
+    <Content Include="admin\files\2021\11\سامانه ها.pdf" />
+    <None Include="packages.config" />
+    <Content Include="Site1.Master" />
+    <Content Include="Shekayat.xsc">
+      <DependentUpon>Shekayat.xsd</DependentUpon>
+    </Content>
+    <Content Include="rates.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Shekayat.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Shekayat.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Shekayat.xss">
+      <DependentUpon>Shekayat.xsd</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49825</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44366/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
