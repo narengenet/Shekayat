@@ -73,7 +73,7 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <asp:Label ID="Label2" runat="server" AssociatedControlID="Province" CssClass="form-label" Text="استان"></asp:Label><span class="text-danger"> * </span>
+                                    <asp:Label ID="Label2" runat="server" AssociatedControlID="Province" CssClass="form-label" Text="ناستان"></asp:Label><span class="text-danger"> * </span>
                                     <asp:DropDownList ID="Province" runat="server" class="form-select mandatory">
                                         <asp:ListItem Selected="True" Value="-1">انتخاب استان ...</asp:ListItem>
                                         <asp:ListItem Value="1">آذربایجان شرقی</asp:ListItem>
