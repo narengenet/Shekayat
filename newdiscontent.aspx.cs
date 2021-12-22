@@ -29,7 +29,7 @@ namespace Shekayat
                     thetoken = CreateGuid(5).ToLower();
                     for (int i = 0; i < _dt.Rows.Count; i++)
                     {
-                        if (_dt.Rows[i]["thread_fixed_token"].ToString().ToLower()==thetoken)
+                        if (_dt.Rows[i]["thread_fixed_token"].ToString().ToLower() == thetoken)
                         {
                             result = true;
                         }
@@ -43,6 +43,8 @@ namespace Shekayat
                 Session["threadid"] = threadid;
                 _ta.Insert(Convert.ToInt64(threadid), thetoken);
                 Session["threadfixedtoken"] = thetoken;
+
+
             }
         }
 
@@ -62,21 +64,56 @@ namespace Shekayat
             if (HiddenField1.Value == "1")
             {
                 // insert threat's text to posts
-                if (texts.Text.Length>0)
+                if (texts.Text.Length > 0)
                 {
                     // insert text post to thread
                     ShekayatTableAdapters.postsTableAdapter postTA = new ShekayatTableAdapters.postsTableAdapter();
-                    object postid= postTA.InsertText(Convert.ToInt64(Session["threadid"]), texts.Text, DateTime.Now);
+                    object postid = postTA.InsertText(Convert.ToInt64(Session["threadid"]), texts.Text, DateTime.Now);
                     // log success text post
                     logs.CreateLog(Convert.ToInt32(Session["userid"]), -1, 11, "ارسال متن شکایت برای شکایت:" + Session["threadid"].ToString(), "postid:" + postid, Convert.ToInt32(Session["threadid"]), subject.Text);
                 }
 
                 // update thread's subject
                 ShekayatTableAdapters.threadsTableAdapter threadTA = new ShekayatTableAdapters.threadsTableAdapter();
-                threadTA.UpdateSubmitThread(subject.Text, Convert.ToInt64(Session["threadid"]));
+                int dep_id = 2;
+                if (DropDownList1.SelectedValue!="-2")
+                {
+                    dep_id = Convert.ToInt32(DropDownList1.SelectedValue);
+                }
+                threadTA.UpdateSubmitThread(subject.Text, dep_id,Convert.ToInt64(Session["threadid"]));
 
                 Response.Redirect("/discontentresult.aspx", true);
 
+            }
+        }
+
+        protected void sqldsSubjects_Selected(object sender, SqlDataSourceStatusEventArgs e)
+        {
+
+            
+        }
+
+        protected void DropDownList1_DataBound(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                DropDownList1.Items.Insert(0,new System.Web.UI.WebControls.ListItem("انتخاب موضوع ...", "-1"));
+                DropDownList1.Items.Add(new System.Web.UI.WebControls.ListItem("سایر", "-2"));
+
+            }
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DropDownList1.SelectedValue=="-2")
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "PageUp", @"<script type='text/javascript'>$('#ContentPlaceHolder1_subject').removeClass('d-none');</script>", false);
+                subject.Text = "";
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "PageUp", @"<script type='text/javascript'>$('#ContentPlaceHolder1_subject').addClass('d-none');</script>");
+                subject.Text = DropDownList1.SelectedItem.Text;
             }
         }
     }

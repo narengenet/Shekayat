@@ -32,6 +32,7 @@ namespace Shekayat
                         Session["threadid"] = dt.Rows[0]["thread_id"];
                         Session["threadsubject"] = dt.Rows[0]["subject"].ToString();
                         Session["threadscore"] = dt.Rows[0]["score"].ToString();
+                        Session["threaddepartment"] = dt.Rows[0]["department_id"].ToString();
                         isReplied = Convert.ToBoolean(Session["replied"]);
                         Session["threadtoken"] = fixedDT.Rows[0]["thread_fixed_token"];
 

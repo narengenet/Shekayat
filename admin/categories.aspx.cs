@@ -136,6 +136,30 @@ namespace Shekayat.admin
                 }
             }
 
+            if (GridView1.SelectedRow != null)
+            {
+                checkSubjectGridEditDeleteBtns();
+                pnlSubjects.Style.Add("display", "block");
+                //grdvSubjects.DataBind();
+            }
+            else
+            {
+                pnlSubjects.Style.Add("display", "none");
+            }
+
+
+
+        }
+
+        private void checkSubjectGridEditDeleteBtns()
+        {
+            int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+            bool permissionpage = PermissionChecks.CheckPermission(22, adminid);
+            if (!permissionpage)
+            {
+
+                
+            }
         }
 
         protected void btnCreateNewCategory_Click(object sender, EventArgs e)
@@ -260,6 +284,9 @@ namespace Shekayat.admin
                 else if (_dt.Rows.Count == 0)
                 {
                     depTA.Update(TextBox1.Text, depVal);
+
+                    int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+                    logs.CreateLog(-1, adminid, 36, "ویرایش نام دپارتمان به:", TextBox1.Text, Convert.ToInt32(depVal), TextBox1.Text);
                     SessionHelpers.SetSession("result", true, "3");
 
                 }
@@ -288,6 +315,97 @@ namespace Shekayat.admin
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "editDepContainer", "hideEditDeps();", true);
 
             }
+
+            if (GridView1.SelectedRow != null)
+            {
+
+                pnlSubjects.Style.Add("display", "block");
+                grdvSubjects.DataBind();
+            }
+            else
+            {
+                pnlSubjects.Style.Add("display", "none");
+            }
+        }
+
+
+        protected void btnNewSubject_Click(object sender, EventArgs e)
+        {
+            bool permissionpage = false;
+            int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+            // check admin permission for edit department
+            permissionpage = PermissionChecks.CheckPermission(23, adminid);
+            if (!permissionpage)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('ایجاد موضوع جدید ');", true);
+            }
+            else
+            {
+                int selectedDepId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+                string selectedDepText = GridView1.SelectedRow.Cells[2].Text;
+                string newSubjectText = txtNewSubject.Text;
+                ShekayatTableAdapters.departments_subjectsTableAdapter _ta = new ShekayatTableAdapters.departments_subjectsTableAdapter();
+                _ta.InsertSubject(newSubjectText, selectedDepId, true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "editSub", "showSuccessCreateNewSubject()", true);
+                grdvSubjects.DataBind();
+                //log
+                logs.CreateLog(-1, adminid, 35, "موضوع جدید:", newSubjectText, Convert.ToInt32(selectedDepId), newSubjectText);
+                
+            }
+        }
+
+        protected void grdvSubjects_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+            bool permissionpage = PermissionChecks.CheckPermission(22, adminid);
+            if (!permissionpage)
+            {
+
+                e.Cancel = true;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission(' حذف موضوع ');", true);
+            }
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "editDepContainer", "showEditDeps();", true);
+        }
+
+        protected void grdvSubjects_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            //int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+            //bool permissionpage = PermissionChecks.CheckPermission(21, adminid);
+            //if (!permissionpage)
+            //{
+
+            //    e.Cancel = true;
+            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission(' ویرایش موضوع ');", true);
+            //}
+            //else
+            //{
+            //    e.Cancel = false;
+            //    object orig = e.Keys[0];
+            //    ShekayatTableAdapters.departments_subjectsTableAdapter _ta = new ShekayatTableAdapters.departments_subjectsTableAdapter();
+            //    string newtext = ((TextBox)(grdvSubjects.Rows[e.RowIndex]).Cells[2].Controls[0]).Text;
+
+            //    int result = _ta.Update(e.NewValues[0].ToString(), Convert.ToInt32(e.NewValues[1]), Convert.ToBoolean(e.NewValues[2]), Convert.ToInt32(orig));
+            //}
+        }
+
+        protected void grdvSubjects_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            //grdvSubjects.EditIndex = e.NewEditIndex;
+            //grdvSubjects.DataBind();
+        }
+
+        protected void grdvSubjects_RowUpdating1(object sender, GridViewUpdateEventArgs e)
+        {
+            int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+            bool permissionpage = PermissionChecks.CheckPermission(21, adminid);
+            if (!permissionpage)
+            {
+
+                e.Cancel = true;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission(' ویرایش موضوع ');", true);
+            }
+
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "editDepContainer", "showEditDeps();", true);
         }
     }
 }

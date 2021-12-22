@@ -78,7 +78,7 @@ namespace Shekayat.admin
             
             //--- Getting connection string defined in the web.config file. Pointed to the database we want to use.
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["shekayatConnectionString"].ConnectionString);
-            string cmdText = "SELECT threads.thread_id AS 'شناسه شکایت', clients.name AS نام, clients.family AS 'نام خانوادگی', threads.creationdate AS تاریخ, states.state_name AS استان, clients.city AS شهر, departments.name AS دپارتمان,threads.score AS امتیاز FROM  clients INNER JOIN  threads ON clients.userid = threads.userid INNER JOIN departments ON threads.department_id = departments.department_id INNER JOIN states ON clients.state_id = states.state_id WHERE (1=1) ";
+            string cmdText = "SELECT threads.thread_id AS 'شناسه شکایت', clients.name AS نام, clients.family AS 'نام خانوادگی' ,threads.creationdate AS تاریخ, states.state_name AS استان, clients.city AS شهر, departments.name AS دپارتمان,threads.score AS امتیاز , clients.mobile AS 'تلفن همراه',threads.subject AS 'موضوع شکایت'  FROM  clients INNER JOIN  threads ON clients.userid = threads.userid INNER JOIN departments ON threads.department_id = departments.department_id INNER JOIN states ON clients.state_id = states.state_id WHERE (1=1) ";
             //string cmdText = "SELECT clients.state_id, threads.userid, threads.creationdate, threads.department_id, threads.score FROM clients INNER JOIN threads ON clients.userid = threads.userid WHERE (threads.creationdate > '1/1/2018') AND (threads.creationdate < '1/1/2022') AND (threads.department_id = 2)";
             if (DropDownList1.SelectedValue.Length > 0)
             {

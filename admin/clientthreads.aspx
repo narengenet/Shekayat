@@ -106,7 +106,7 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-            <asp:SqlDataSource ID="Threads" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT DISTINCT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN posts ON threads.thread_id = posts.thread_id INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id ORDER BY threads.creationdate DESC" OnSelected="Threads_Selected"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="Threads" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT DISTINCT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN posts ON threads.thread_id = posts.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id ORDER BY threads.creationdate DESC" OnSelected="Threads_Selected"></asp:SqlDataSource>
         </div>
         <div class="p-1 text-muted" style="text-align:center;font-size:0.7rem;font-weight:bold;border:solid 1px black;border-radius:8px;margin:1rem;">
             تعداد کل <asp:Label runat="server" ID="countall"></asp:Label>
@@ -151,7 +151,7 @@
                 <HeaderTemplate>
                     <div class="chat-back container">
                         <label class="form-label">شناسه شکایت:</label><label class="form-label subject-header"><%= threadid_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
-                        <label class="form-label">موضوع:</label><label class="form-label subject-header"><%= threadsubject_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
+                        
                         <label class="form-label">نام و نام خانوادگی:</label><label class="form-label subject-header"><%= threadfullname_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">استان و شهرستان:</label><label class="form-label subject-header"><%= threadfulllocation_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">تلفن همراه:</label><label class="form-label subject-header"><%= threadmobile_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
@@ -160,7 +160,8 @@
                         <label class="form-label">دپارتمان:</label><label class="form-label subject-header"><%= threaddep_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">کدملی:</label><label class="form-label subject-header"><%= threadnational_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">شماره بیمه:</label><label class="form-label subject-header"><%= threadinsurance_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
-
+                        <br />
+                        <label class="form-label">موضوع:</label><label class="form-label subject-header"><%= threadsubject_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                             <%--<div class="subject-parent">
                                 <h3 class="subject-header"></h3>
                             </div>--%>
@@ -203,7 +204,8 @@
                                 <asp:Label runat="server" AssociatedControlID="fileupload" CssClass="upload-label" Text="فایل ضمیمه"></asp:Label>
                                 <asp:Label runat="server" CssClass="form-label text-danger upload-label-label" Text="فایل های مجاز DOC,PDF,JPG"></asp:Label>
                                 <asp:FileUpload runat="server" ID="fileupload" CssClass="hidden-input" />
-                                <asp:Button ID="Button1" runat="server" Text="ارسال پاسخ" OnClick="Button1_Click" CssClass="btn-success rounded p-1" />
+                                <input type="button" class="btn-info rounded p-1 temp-send-reply-btn" value="آماده سازی برای ارسال" onclick="prepareSubmitBtn()" />
+                                <asp:Button ID="Button1" runat="server" Text="ارسال پاسخ" OnClick="Button1_Click" CssClass="btn-success rounded p-1 main-send-reply-btn d-none" />
                             </div>
                         </div>
                         <div class="row">
@@ -258,7 +260,7 @@
             </asp:SqlDataSource>
 
 
-            <asp:SqlDataSource ID="notansweredDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id WHERE (threads.replied = 0) ORDER BY threads.creationdate DESC" OnSelected="notansweredDS_Selected"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="notansweredDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id WHERE (threads.replied = 0) AND (threads.iscompleted = 1) ORDER BY threads.creationdate DESC" OnSelected="notansweredDS_Selected"></asp:SqlDataSource>
             <asp:SqlDataSource ID="openDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token, thread_fixed_tokens_1.thread_fixed_token AS Expr2 FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id INNER JOIN thread_fixed_tokens AS thread_fixed_tokens_1 ON threads.thread_id = thread_fixed_tokens_1.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id WHERE (threads.isclosed = 0) ORDER BY threads.creationdate DESC" OnSelected="openDS_Selected"></asp:SqlDataSource>
             <asp:SqlDataSource ID="closedDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id WHERE (threads.isclosed = 1) ORDER BY threads.creationdate DESC" OnSelected="closedDS_Selected"></asp:SqlDataSource>
             <asp:SqlDataSource ID="notseenDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid LEFT OUTER JOIN departments ON threads.department_id = departments.department_id WHERE (threads.seen = 0) ORDER BY threads.creationdate DESC" OnSelected="notseenDS_Selected"></asp:SqlDataSource>
@@ -267,7 +269,7 @@
             <asp:SqlDataSource ID="todayDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id WHERE (CAST(threads.creationdate AS DATE) = CAST(GETDATE() AS DATE)) ORDER BY threads.creationdate DESC" OnSelected="todayDS_Selected"></asp:SqlDataSource>
 
 
-            <asp:SqlDataSource ID="searchDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT DISTINCT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM threads INNER JOIN departments ON threads.department_id = departments.department_id INNER JOIN clients ON threads.userid = clients.userid INNER JOIN states ON clients.state_id = states.state_id INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id WHERE (threads.subject = @search) OR (departments.name = @search) OR (clients.mobile = @search) OR (clients.name = @search) OR (clients.family = @search) OR (clients.mobile = @search) OR (clients.city = @search) OR (threads.subject = @search) OR (departments.name = @search) OR (threads.subject = @search) OR (clients.national_code = @search) OR (clients.insurance_code = @search) OR (thread_fixed_tokens.thread_fixed_token = @search)" OnSelected="searchDS_Selected">
+            <asp:SqlDataSource ID="searchDS" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT DISTINCT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM threads INNER JOIN departments ON threads.department_id = departments.department_id INNER JOIN clients ON threads.userid = clients.userid INNER JOIN states ON clients.state_id = states.state_id INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id WHERE (threads.subject = @search) OR (departments.name = @search) OR (clients.mobile = @search) OR (clients.name = @search) OR (clients.family = @search) OR (clients.mobile = @search) OR (clients.city = @search) OR (threads.subject = @search) OR (departments.name = @search) OR (threads.subject = @search) OR (clients.national_code = @search) OR (clients.insurance_code = @search) OR (thread_fixed_tokens.thread_fixed_token = @search) OR (threads.thread_id LIKE @search)" OnSelected="searchDS_Selected">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="TextBox1" Name="search" PropertyName="Text" />
                 </SelectParameters>
@@ -286,6 +288,13 @@
 
 
     <script>
+
+
+        function prepareSubmitBtn() {
+            alert('پس از ارسال پاسخ، پیامک اطلاع رسانی برای شاکی ارسال خواهد شد. این عملیات بدون بازگشت است. چنانچه از صحت پاسخ خود اطمینان دارید دکمه ارسال پاسخ را بزنید.');
+            $('.main-send-reply-btn').removeClass('d-none');
+            $('.temp-send-reply-btn').addClass('d-none');
+        }
 
 
         $(document).ready(function () {
@@ -528,7 +537,7 @@
         function notEditPermitedShow() {
             $('.toast-header').addClass('bg-danger');
             $('#toasttitle').addClass('text-white');
-            $("#toasttitle").html('اشکال سطج دسترسی');
+            $("#toasttitle").html('اشکال سطح دسترسی');
             $('#toastbody').html('شما دسترسی لازم برای ' + permission_errore_subject + ' شکایت را ندارید.');
             $('.toast').toast('show');
         }

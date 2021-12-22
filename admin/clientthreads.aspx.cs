@@ -518,7 +518,7 @@ namespace Shekayat.admin
                 string _threadid = GridView1.SelectedRow.Cells[1].Text;
                 threadid = Convert.ToInt64(_threadid);
 
-                last_dep_text = GridView1.SelectedRow.Cells[17].Text;
+                last_dep_text = GridView1.SelectedRow.Cells[18].Text;
             }
 
             int selectedDepIndex = Convert.ToInt32(DropDownList2.SelectedValue);
@@ -531,7 +531,7 @@ namespace Shekayat.admin
             }
             else
             {
-                logs.CreateLog(-1, adminid, 29, "تغییر دپارتمان شکایت از :", last_dep_text, Convert.ToInt32(threadid), DropDownList2.SelectedItem.Text);
+                logs.CreateLog(-1, adminid, 29, "تغییر دپارتمان شکایت از :"+ last_dep_text, last_dep_text, Convert.ToInt32(threadid), DropDownList2.SelectedItem.Text);
             }
             //Session["result"] = "edited";
             //Session["selectedindex"] = selectedDepIndex;
@@ -652,8 +652,9 @@ namespace Shekayat.admin
             threadTA.UpdateReplyedByThreadID(true,DateTime.Now, threadid);
             // close thread after reply
             threadTA.UpdateIsClosedThreadByThreadID(true, threadid);
-            
+
             //Page.ClientScript.RegisterStartupScript(this.GetType(), "closeReplyy", "closeReply();", true);
+            logs.CreateLog(-1, adminid, 30, "ارسال پاسخ به شکایت:", adminid.ToString(), Convert.ToInt32(threadid), adminReplyText.Text);
 
 
 

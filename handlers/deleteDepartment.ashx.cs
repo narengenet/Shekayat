@@ -26,14 +26,23 @@ namespace Shekayat.handlers
                 int adminid = Convert.ToInt32(_adminid);
                 int depid = Convert.ToInt32(_depid);
                 ShekayatTableAdapters.departmentsTableAdapter depTA = new ShekayatTableAdapters.departmentsTableAdapter();
+                Shekayat.departmentsDataTable depDT = new Shekayat.departmentsDataTable();
                 ShekayatTableAdapters.threadsTableAdapter threadTA = new ShekayatTableAdapters.threadsTableAdapter();
-                // change threat's dep relevant to this dep to null dep
-                threadTA.UpdateDepIDByDepID(-1, depid);
-                // delete dep
-                result = depTA.DeleteDepByID(depid);
 
-                // log delete thread
-                logs.CreateLog(-1, adminid, 26, "حذف دپارتمان توسط مدیر:", depid.ToString(), Convert.ToInt32(depid), "");
+                depDT= depTA.GetDepartmentByDepID(depid);
+                if (depDT.Rows.Count>0)
+                {
+                    string depName = depDT.Rows[0]["name"].ToString();
+                    // change threat's dep relevant to this dep to null dep
+                    threadTA.UpdateDepIDByDepID(-1, depid);
+                    // delete dep
+                    result = depTA.DeleteDepByID(depid);
+                    
+                    // log delete thread
+                    logs.CreateLog(-1, adminid, 26, "حذف دپارتمان:"+depName, depid.ToString(), Convert.ToInt32(depid), "");
+                }
+
+
 
                 SessionHelpers.SetSession("successdeleted", false, "1");
 

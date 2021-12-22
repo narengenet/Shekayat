@@ -37,6 +37,7 @@ namespace Shekayat
                     Session["userid"] = threadDT.Rows[0]["userid"];
                     Session["replied"] = threadDT.Rows[0]["replied"];
                     Session["threadscore"] = threadDT.Rows[0]["score"];
+                    Session["threaddepartment"] = threadDT.Rows[0]["department_id"].ToString();
                     ShekayatTableAdapters.clientsTableAdapter clientTA = new ShekayatTableAdapters.clientsTableAdapter();
                     Shekayat.clientsDataTable clientDT = clientsTA.GetUserByID(Convert.ToInt64(Session["userid"].ToString()));
                     ShekayatTableAdapters.thread_fixed_tokensTableAdapter fixedTA = new ShekayatTableAdapters.thread_fixed_tokensTableAdapter();
@@ -99,6 +100,7 @@ namespace Shekayat
                 Session["replied"] = threadDT.Rows[0]["replied"];
                 Session["threadscore"] = threadDT.Rows[0]["score"];
                 Session["threadtoken"] = fixedDT.Rows[0]["thread_fixed_token"];
+                Session["threaddepartment"] = threadDT.Rows[0]["department_id"].ToString();
                 ShekayatTableAdapters.clientsTableAdapter clientTA = new ShekayatTableAdapters.clientsTableAdapter();
                 Shekayat.clientsDataTable clientDT = clientsTA.GetUserByID(Convert.ToInt64(Session["userid"].ToString()));
                 if (clientDT.Rows.Count > 0)
@@ -145,20 +147,20 @@ namespace Shekayat
                 if (clients.Rows.Count > 0)
                 {
                     // client has records
-                    clientsTA.UpdateClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(state.SelectedValue), city.Text, Convert.ToDateTime(clients.Rows[0]["creationdate"]), DateTime.Now, true, token.ToString(),NationalCode.Text, InsuranceCode.Text ,Convert.ToInt64(clients.Rows[0]["userid"]));
+                    clientsTA.UpdateClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, Convert.ToDateTime(clients.Rows[0]["creationdate"]), DateTime.Now, true, token.ToString(),NationalCode.Text, InsuranceCode.Text ,Convert.ToInt64(clients.Rows[0]["userid"]));
                     Session["userid"] = clients.Rows[0]["userid"];
                 }
                 else
                 {
                     // new client
-                    object identity = clientsTA.InsertClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(state.SelectedValue), city.Text, DateTime.Now, DateTime.Now, true, token.ToString(),NationalCode.Text,InsuranceCode.Text);
+                    object identity = clientsTA.InsertClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, DateTime.Now, DateTime.Now, true, token.ToString(),NationalCode.Text,InsuranceCode.Text);
                     if (Convert.ToInt32(identity)==1)
                     {
                         clients = clientsTA.GetClientsByMobile(mobile.Text);
                         if (clients.Rows.Count>0)
                         {
                             Session["userid"] = clients.Rows[0]["userid"];
-                            logs.CreateLog(Convert.ToInt32(identity), -1, 6, "شاکی جدید:" + mobile.Text, firstName.Text + " " + lastName.Text, -1, state.SelectedItem.Text + "," + city.Text);
+                            logs.CreateLog(Convert.ToInt32(identity), -1, 6, "شاکی جدید:" + mobile.Text, firstName.Text + " " + lastName.Text, -1, Province.SelectedItem.Text + "," + city.Text);
                         }
                     }
                     
@@ -222,15 +224,15 @@ namespace Shekayat
                 RemoveCssClass(mobile, "is-invalid");
             }
 
-            if (state.SelectedValue == "-1")
+            if (Province.SelectedValue == "-1")
             {
                 result = false;
-                RemoveCssClass(state, "is-invalid");
-                AddCssClass(state, "is-invalid");
+                RemoveCssClass(Province, "is-invalid");
+                AddCssClass(Province, "is-invalid");
             }
             else
             {
-                RemoveCssClass(state, "is-invalid");
+                RemoveCssClass(Province, "is-invalid");
             }
 
             if (city.Text.Length < 1 || PermissionChecks.checkForSQLInjection(city.Text))

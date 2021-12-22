@@ -160,11 +160,20 @@
                         type: "column",
                         dataPoints: [
                             { label: "بدون نظر", y: parseInt(score0) },
-                            { label: "خیلی بد", y: parseInt(score1) },
-                            { label: "بد", y: parseInt(score2) },
-                            { label: "متوسط", y: parseInt(score3) },
+                            
+                            
+                            
+                            
+                            { label: "خیلی خوب", y: parseInt(score5) },
                             { label: "خوب", y: parseInt(score4) },
-                            { label: "خیلی خوب", y: parseInt(score5) }
+                            { label: "متوسط", y: parseInt(score3) },
+                            { label: "بد", y: parseInt(score2) },
+                            { label: "خیلی بد", y: parseInt(score1) }
+                            
+                            
+                            
+
+
                         ]
                     }]
                 };
@@ -199,7 +208,7 @@
             function notEditPermitedShow() {
                 $('.toast-header').addClass('bg-danger');
                 $('#toasttitle').addClass('text-white');
-                $("#toasttitle").html('اشکال سطج دسترسی');
+                $("#toasttitle").html('اشکال سطح دسترسی');
                 $('#toastbody').html('شما دسترسی لازم برای ' + permission_errore_subject + ' گزارش را ندارید.');
                 $('.toast').toast('show');
             }

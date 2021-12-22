@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row g-3 align-content-center">
-                <div class="col-sm-4 p-0">
+        <div class="col-sm-4 p-0">
             <div class="bg-secondary p-1 mb-0 pb-3 text-white text-center rounded">
                 تمام درخواست های ثبت شده شما
             </div>
@@ -43,11 +43,12 @@
         <div class="col-sm-8">
             <label class="form-label" for="subject">موضوع</label>
             <input class="form-control" id="subject" disabled runat="server" />
-            <label class="form-label mt-2" for="subject">کد پیگیری 
-                <input id="fixedtoken" style="text-align:center;" disabled runat="server" />
+            <label class="form-label mt-2" for="subject">
+                کد پیگیری 
+                <input id="fixedtoken" style="text-align: center;" disabled runat="server" />
             </label>
-            
-            
+
+
 
             <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                 <HeaderTemplate>
@@ -77,47 +78,48 @@
                     </div>
                 </ItemTemplate>
                 <FooterTemplate>
-                    <div id="not-replied-text" style="border:1px solid black;margin:1rem;border-radius:5px; background-color:antiquewhite;text-align:center;padding:1rem;">
+                    <div id="not-replied-text" style="border: 1px solid black; margin: 1rem; border-radius: 5px; background-color: antiquewhite; text-align: center; padding: 1rem;"></div>
 
-                    </div>
-                    <div class="<%# Session["replied"].ToString()=="True" ? "":"d-none"%>">
-                        <div class="row">
-                            <hr class="mb-1 mt-2" />
-                            <div class="col">
-                                <label class="form-label" id="rating_label_text" for="rates">سطح رضایت شما از پاسخگویی چطور بود؟</label>
+                        <div id="department-set-text" style="border: 1px solid black; margin: 1rem; border-radius: 5px; background-color: aliceblue; text-align: center; padding: 1rem;">
+                        </div>
+                        <div class="<%# Session["replied"].ToString()=="True" ? "":"d-none"%>">
+                            <div class="row">
+                                <hr class="mb-1 mt-2" />
+                                <div class="col">
+                                    <label class="form-label" id="rating_label_text" for="rates">سطح رضایت شما از پاسخگویی چطور بود؟</label>
+                                </div>
+                            </div>
+                            <div class="ratings">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
+                                    <label class="form-check-label" for="inlineRadio5">خیلی خوب</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4">
+                                    <label class="form-check-label" for="inlineRadio4">خوب</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
+                                    <label class="form-check-label" for="inlineRadio3">متوسط</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                                    <label class="form-check-label" for="inlineRadio2">بد</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                                    <label class="form-check-label" for="inlineRadio1">خیلی بد</label>
+                                </div>
+
+                                <div class="form-check form-check-inline mb-2">
+                                    <input type="button" id="submitscorebtn" class="btn-warning rounded" value="ثبت" onclick="registerRate()" />
+                                </div>
                             </div>
                         </div>
-                        <div class="ratings">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
-                                <label class="form-check-label" for="inlineRadio5">خیلی خوب</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4">
-                                <label class="form-check-label" for="inlineRadio4">خوب</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
-                                <label class="form-check-label" for="inlineRadio3">متوسط</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
-                                <label class="form-check-label" for="inlineRadio2">بد</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input rating-radio" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">خیلی بد</label>
-                            </div>
-
-                            <div class="form-check form-check-inline mb-2">
-                                <input type="button" id="submitscorebtn" class="btn-warning rounded" value="ثبت" onclick="registerRate()" />
-                            </div>
-                        </div>
-                    </div>
                     </div>
                 </FooterTemplate>
             </asp:Repeater>
@@ -183,9 +185,10 @@
             var threadid = '<%= Session["threadid"].ToString() %>';
             var thescore = '<%= Session["threadscore"].ToString() %>';
             var replied = '<%= Session["replied"].ToString() %>';
+            var department = '<%= Session["threaddepartment"].ToString() %>';
             $('.message[data-thread=' + threadid + ']').addClass('bg-warning');
 
-            if (thescore=='0') {
+            if (thescore == '0') {
                 $('#submitscorebtn').css('display', 'block');
             } else {
                 $("#inlineRadio" + thescore).prop("checked", true);
@@ -194,13 +197,16 @@
                 $('#rating_label_text').html('سطح رضایت ثبت شده توسط نسبت به این شکایت:')
             }
 
-            if (replied=='False') {
-                //alert('هنوز پاسخ شکایت شما ارسال نشده است. در اسرع وقت به شکایت شما رسیدگی خواهد شد.');
+            if (replied == 'False' && department == "2") {
                 $('#not-replied-text').html('هنوز پاسخ شکایت شما ارسال نشده است. در اسرع وقت به شکایت شما رسیدگی خواهد شد.');
+                $('#department-set-text').css('display', 'none');
+            } else if (replied == 'False' && department != "2") {
+                $('#department-set-text').html('شکایت شما بررسی و به دپارتمان مورد نظر ارسال شد. پس از دریافت پاسخ به شما اطلاع رسانی خواهد شد.');
+                $('#not-replied-text').css('display', 'none');
             } else {
+                $('#department-set-text').css('display', 'none');
                 $('#not-replied-text').css('display', 'none');
             }
-
 
 
 

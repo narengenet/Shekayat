@@ -6,7 +6,16 @@
     <div class="row g-3">
         <div class="col-sm-12">
             <asp:Label ID="Label5" runat="server" AssociatedControlID="subject" CssClass="form-label" Text="موضوع درخواست"></asp:Label>
-            <asp:TextBox ID="subject" runat="server" class="form-control"></asp:TextBox>
+
+            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" CssClass="form-select" DataSourceID="sqldsSubjects" DataTextField="subject_text" DataValueField="subject_id" OnDataBound="DropDownList1_DataBound" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+            </asp:DropDownList>
+            <asp:SqlDataSource ID="sqldsSubjects" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" OnSelected="sqldsSubjects_Selected" SelectCommand="SELECT * FROM [departments_subjects] WHERE ([is_active] = @is_active)">
+                <SelectParameters>
+                    <asp:Parameter DefaultValue="true" Name="is_active" Type="Boolean" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+
+            <asp:TextBox ID="subject" runat="server" class="form-control d-none mt-2"  placeholder="لطفا موضوع درخواست خود را بنویسید..."></asp:TextBox>
             <br />
             <input id="subjectsubmit" type="button" class="btn btn-info col-sm-12 w-100" value="ادامه" /><asp:HiddenField ID="HiddenField1" runat="server" Value="-1" />
 &nbsp;</div>
@@ -65,9 +74,10 @@
             $('#subjectsubmit').click(function () {
                 if ($('#ContentPlaceHolder1_subject').val() != '') {
                     $('.second-step').removeClass('second-step-hide');
+                    $('#ContentPlaceHolder1_DropDownList1').attr('disabled', 'true');
                     $('#subjectsubmit').hide();
                 } else {
-                    alert('no');
+                    alert('لطفا یک موضوع درخواست برای شکایت خود انتخاب کنید.');
                 }
             });
 
@@ -128,6 +138,13 @@
             $('#ContentPlaceHolder1_Button1').removeAttr("disabled");
         }
 
+        function showTextBox() {
+            $('#ContentPlaceHolder1_subject').removeClass('d-none');
+        }
+
+        function hideTextBox() {
+            $('#ContentPlaceHolder1_subject').addClass('d-none');
+        }
 
         function goSubmit() {
             if (post_status == true) {

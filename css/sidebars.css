@@ -262,3 +262,7 @@ th{
         justify-content: center;
         align-items: center;
     }
+
+.panel-subject {
+    background-color: PaleGoldenrod!important;
+}

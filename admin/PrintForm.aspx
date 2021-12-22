@@ -47,7 +47,6 @@
                     <div class="chat-back-print container" style="width: 800px; direction: rtl;">
 
                         <label class="form-label">شناسه شکایت:</label><label class="form-label subject-header"><%= threadid_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
-                        <label class="form-label">موضوع:</label><label class="form-label subject-header"><%= threadsubject_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">نام و نام خانوادگی:</label><label class="form-label subject-header"><%= threadfullname_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">استان و شهرستان:</label><label class="form-label subject-header"><%= threadfulllocation_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">تلفن همراه:</label><label class="form-label subject-header"><%= threadmobile_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
@@ -56,6 +55,8 @@
                         <label class="form-label">دپارتمان:</label><label class="form-label subject-header"><%= threaddep_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">کدملی:</label><label class="form-label subject-header"><%= threadnational_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
                         <label class="form-label">شماره بیمه:</label><label class="form-label subject-header"><%= threadinsurance_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
+                        <br />
+                        <label class="form-label">موضوع:</label><label class="form-label subject-header"><%= threadsubject_client.ToString() %></label>&nbsp;&nbsp;&nbsp;
 
                         <hr />
                         <label class="form-label">متن پیام (ها)</label>

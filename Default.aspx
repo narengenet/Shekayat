@@ -61,7 +61,7 @@
 
                                 <div class="col-6">
                                     <asp:Label ID="Label8" runat="server" AssociatedControlID="NationalCode" class="form-label" Text="کد ملی"></asp:Label><span class="text-danger"> * </span>
-                                    <asp:TextBox ID="NationalCode" runat="server" class="form-control mandatory" placeholder="کدملی ده رقمی"></asp:TextBox>
+                                    <asp:TextBox ID="NationalCode" runat="server" class="form-control mandatory" placeholder="کدملی ده رقمی" AutoCompleteType="Enabled"></asp:TextBox>
                                     <div class="invalid-feedback">
                                         لطفا کد ملی ده رقمی خود را کامل بنویسید.
                                     </div>
@@ -73,8 +73,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <asp:Label ID="Label2" runat="server" AssociatedControlID="state" CssClass="form-label" Text="استان"></asp:Label><span class="text-danger"> * </span>
-                                    <asp:DropDownList ID="state" runat="server" class="form-select mandatory">
+                                    <asp:Label ID="Label2" runat="server" AssociatedControlID="Province" CssClass="form-label" Text="استان"></asp:Label><span class="text-danger"> * </span>
+                                    <asp:DropDownList ID="Province" runat="server" class="form-select mandatory">
                                         <asp:ListItem Selected="True" Value="-1">انتخاب استان ...</asp:ListItem>
                                         <asp:ListItem Value="1">آذربایجان شرقی</asp:ListItem>
                                         <asp:ListItem Value="2">آذربایجان غربی</asp:ListItem>
@@ -335,9 +335,10 @@
                 result = false;
             }
 
-            if ($('#ContentPlaceHolder1_NationalCode').val().length != 10) {
-                result = false;
-            }
+
+            result = myfunction($('#ContentPlaceHolder1_NationalCode').val());
+
+
 
             if ($('#ContentPlaceHolder1_state').val() == '-1') {
                 result = false;
@@ -351,6 +352,30 @@
                 $('#ContentPlaceHolder1_newDiscontent').removeAttr('disabled');
             } else {
                 $('#ContentPlaceHolder1_newDiscontent').attr('disabled', 'disabled');
+            }
+        }
+
+        function myfunction(xv) {
+            if (isNaN(xv)) {
+                return false;
+            } else if (xv == "") {
+                return false;
+            } else if (xv.length < 10) {
+                return false;
+            } else {
+                var yy = 0;
+                var yv = parseInt(yv);
+                for (let i = 0; i < xv.length; i++) {
+                    yv = xv[i] * (xv.length - i);
+                    yy += yv;
+                }
+                var x = yy % 11;
+                if (x === 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+                yy = 0;
             }
         }
     </script>
