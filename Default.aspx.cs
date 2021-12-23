@@ -14,7 +14,7 @@ namespace Shekayat
         ShekayatTableAdapters.clientsTableAdapter clientsTA = new ShekayatTableAdapters.clientsTableAdapter();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void discontentByMobile_Click(object sender, EventArgs e)

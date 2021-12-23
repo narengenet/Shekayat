@@ -12,6 +12,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
 using System.Text;
 using System.Data;
+using System.Collections.Specialized;
 
 namespace Shekayat.admin
 {
@@ -657,6 +658,32 @@ namespace Shekayat.admin
             logs.CreateLog(-1, adminid, 30, "ارسال پاسخ به شکایت:", adminid.ToString(), Convert.ToInt32(threadid), adminReplyText.Text);
 
 
+            // send sms
+            Shekayat.threadsDataTable _tmpDT= threadTA.GetThreadByThreadID(threadid);
+            long userid = -1;
+            if (_tmpDT.Rows.Count>0)
+            {
+                userid = Convert.ToInt64(_tmpDT.Rows[0]["userid"]);
+            }
+
+            ShekayatTableAdapters.clientsTableAdapter _clientTA = new ShekayatTableAdapters.clientsTableAdapter();
+            string themobile= _clientTA.GetClientByClientID(userid).Rows[0]["mobile"].ToString();
+
+            ShekayatTableAdapters.thread_fixed_tokensTableAdapter _ttA = new ShekayatTableAdapters.thread_fixed_tokensTableAdapter();
+            Shekayat.thread_fixed_tokensDataTable _ttDT = _ttA.GetDataByThreadID(threadid);
+            string fixedtoken = "";
+            if (_ttDT.Rows.Count>0)
+            {
+                fixedtoken = _ttDT.Rows[0]["thread_fixed_tokens"].ToString();
+            }
+
+
+            verifier.SendSMS("پاسخ شکایت شما در سامانه شکایات مردمی ارسال شد. \n کد پیگیری:" + fixedtoken + " \n http://roostaa.ir", themobile);
+
+            // end sms send
+
+
+            
 
             // update gridview and posts
             GridView1.DataBind();

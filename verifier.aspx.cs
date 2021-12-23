@@ -1,7 +1,12 @@
 ﻿using Shekayat.controllers;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,13 +15,78 @@ namespace Shekayat
 {
     public partial class verifier : System.Web.UI.Page
     {
+        public static string DoGET(string URL, NameValueCollection QueryStringParameters = null, NameValueCollection RequestHeaders = null)
+        {
+            string ResponseText = null;
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    if (RequestHeaders != null)
+                    {
+                        if (RequestHeaders.Count > 0)
+                        {
+                            foreach (string header in RequestHeaders.AllKeys)
+                                client.Headers.Add(header, RequestHeaders[header]);
+                        }
+                    }
+                    if (QueryStringParameters != null)
+                    {
+                        if (QueryStringParameters.Count > 0)
+                        {
+                            foreach (string parm in QueryStringParameters.AllKeys)
+                                client.QueryString.Add(parm, QueryStringParameters[parm]);
+                        }
+                    }
+                    byte[] ResponseBytes = client.DownloadData(URL);
+                    ResponseText = Encoding.UTF8.GetString(ResponseBytes);
+                }
+                catch (WebException exception)
+                {
+                    if (exception.Response != null)
+                    {
+                        var responseStream = exception.Response.GetResponseStream();
+
+                        if (responseStream != null)
+                        {
+                            using (var reader = new StreamReader(responseStream))
+                            {
+                                string read = reader.ReadToEnd();
+                            }
+                        }
+                    }
+                }
+            }
+            return ResponseText;
+        }
+
+
+        public static string SendSMS(string body,string mobile)
+        {
+            NameValueCollection QueryStringParameters = new NameValueCollection();
+            QueryStringParameters.Add("cbody", body);
+            QueryStringParameters.Add("cmobileno", mobile);
+            QueryStringParameters.Add("cUsername", "hoze");
+            QueryStringParameters.Add("cpassword", "1qaz@WSX");
+            QueryStringParameters.Add("cDomainName", "ssbera");
+            QueryStringParameters.Add("cEncoding", "1");
+
+            string ss = DoGET("http://172.16.3.94/sms/default.aspx", QueryStringParameters);
+            return ss;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (Session["mobile"] != null)
             {
                 string mobile = Session["mobile"].ToString();
-                txtMobile.InnerText = mobile + " , " + Session["token"].ToString();
+                string orgmobile = Session["mobile"].ToString();
+                //txtMobile.InnerText = mobile + " , " + Session["token"].ToString();
+                mobile = mobile.Substring(0, 4) + "***" + mobile.Substring(7, 4);
+                txtMobile.InnerText = mobile;
+
+                SendSMS("کد ورود شما به سامانه شکایات مردمی\n code:" + Session["token"].ToString(), orgmobile);
 
             }
 

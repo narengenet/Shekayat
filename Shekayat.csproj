@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Flurl.3.0.2\lib\net472\Flurl.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\..\itextsharp.dll</HintPath>
     </Reference>
@@ -50,6 +53,7 @@
     <Reference Include="PersianCalendar">
       <HintPath>..\..\PersianCalender-www.projectp30.ir\PsCalendar\PersianCalendar\bin\PersianCalendar.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
