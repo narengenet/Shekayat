@@ -74,24 +74,25 @@ namespace Shekayat
             string ss = DoGET("http://172.16.3.94/sms/default.aspx", QueryStringParameters);
             return ss;
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Session["mobile"] != null)
+            if (Session["mobile"] != null && !IsPostBack)
             {
+                hasbeensent = true;
                 string mobile = Session["mobile"].ToString();
                 string orgmobile = Session["mobile"].ToString();
                 //txtMobile.InnerText = mobile + " , " + Session["token"].ToString();
-                mobile = mobile.Substring(0, 4) + "***" + mobile.Substring(7, 4);
+                mobile = mobile.Substring(7, 4)+ "***"  + mobile.Substring(0, 4);
                 txtMobile.InnerText = mobile;
 
-                SendSMS("کد ورود شما به سامانه شکایات مردمی\n code:" + Session["token"].ToString(), orgmobile);
+                SendSMS("کد ورود شما به سامانه شکایات مردمی \n code:" + Session["token"].ToString(), orgmobile);
 
             }
 
         }
 
+        public bool hasbeensent = false;
         protected void Button1_Click(object sender, EventArgs e)
         {
             if (floatingInput.Value == Session["token"].ToString())

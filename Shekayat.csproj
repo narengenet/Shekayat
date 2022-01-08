@@ -84,6 +84,14 @@
     <Content Include="admin\editadmin.aspx" />
     <Content Include="admin\files\2021\11\صفحه-تعاملی.png" />
     <Content Include="admin\files\2021\11\پدافند.jpg" />
+    <Content Include="admin\files\2021\12\1.jpg" />
+    <Content Include="admin\files\2021\12\12.jpg" />
+    <Content Include="admin\files\2021\12\4.jpg" />
+    <Content Include="admin\files\2021\12\ezgif.com-gif-maker %284%29.jpg" />
+    <Content Include="admin\files\2021\12\fatemeh.jpg" />
+    <Content Include="admin\files\2021\12\slider_1.jpg" />
+    <Content Include="admin\files\2021\12\slider_2.jpg" />
+    <Content Include="admin\files\2021\12\slider_3.jpg" />
     <Content Include="admin\llogout.aspx" />
     <Content Include="admin\logout.aspx" />
     <Content Include="admin\PrintForm.aspx" />
@@ -351,6 +359,7 @@
     <Content Include="css\fonts\IRANSansWeb_Bold.woff2" />
     <Content Include="admin\files\2021\11\Vithal_Wadje.pdf" />
     <Content Include="admin\files\2021\11\سامانه ها.pdf" />
+    <Content Include="admin\files\2021\12\سامانه ها.pdf" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="Shekayat.xsc">

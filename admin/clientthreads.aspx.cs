@@ -674,7 +674,7 @@ namespace Shekayat.admin
             string fixedtoken = "";
             if (_ttDT.Rows.Count>0)
             {
-                fixedtoken = _ttDT.Rows[0]["thread_fixed_tokens"].ToString();
+                fixedtoken = _ttDT.Rows[0]["thread_fixed_token"].ToString();
             }
 
 
