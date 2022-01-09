@@ -66,12 +66,12 @@ namespace Shekayat.admin
                 // permission problem to create new dep
                 if (_result == "0")
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('ایجاد دسته بندی جدید');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('ایجاد دپارتمان جدید');", true);
                 }
                 // permission problem to delete dep
                 if (_result == "-2")
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('حذف دسته بندی');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('حذف دپارتمان');", true);
                 }
                 // success delete dep
                 if (_result == "2")
@@ -84,7 +84,7 @@ namespace Shekayat.admin
                 // permission problem to edit dep
                 if (_result == "-3")
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('ویرایش دسته بندی');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorPermission('ویرایش دپارتمان');", true);
                 }
                 // problem to edit dep
                 if (_result == "-4")
@@ -100,7 +100,7 @@ namespace Shekayat.admin
                 // new dep name was used before
                 if (_result == "-1")
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorCreateNewDep('ایجاد دسته بندی جدید');", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "editScript", "errorCreateNewDep('ایجاد دپارتمان جدید');", true);
                 }
                 // new dep was created
                 if (_result == "1")
@@ -226,14 +226,23 @@ namespace Shekayat.admin
             }
             else
             {
+                // find selected department id
                 int selectedDepId = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
-                //ShekayatTableAdapters.departmentsTableAdapter depTA = new ShekayatTableAdapters.departmentsTableAdapter();
-                //depTA.DeleteDepByID(selectedDepId);
+                // if selected department id is default department
+                if (selectedDepId==2)
+                {
+                    SessionHelpers.SetSession("result", false, "-2");
+                    Response.Redirect("~/admin/categories.aspx", true);
+                }
+                else
+                {
+                    // prepare session parameters to delete department
+                    SessionHelpers.SetSession("result", false, "2");
+                    SessionHelpers.SetSession("selectedindex", false, selectedDepId);
 
-                SessionHelpers.SetSession("result", false, "2");
-                SessionHelpers.SetSession("selectedindex", false, selectedDepId);
+                    Response.Redirect("~/admin/categories.aspx", true);
+                }
 
-                Response.Redirect("~/admin/categories.aspx", true);
             }
 
         }

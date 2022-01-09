@@ -24,7 +24,7 @@
                     <asp:Button ID="Button1" runat="server" CssClass="w-100 mb-2 btn btn-lg rounded-4 btn-primary" Text="ورود" OnClick="Button1_Click" />
 
                     <small class="text-muted">چنانچه هنوز کدی برای شما پیامک نشده است لطفا کمی منتظر بمانید</small>
-                    <hr class="my-4">
+<%--                    <hr class="my-4">
                     <h2 class="fs-5 fw-bold mb-3">یا مجددا تلاش کنید</h2>
                     <div class="d-flex flex-row-reverse w-100">
                         <button class="w-60 py-2 mb-2 btn btn-outline-warning rounded-4" type="submit">
@@ -32,7 +32,7 @@
                                 <use xlink:href="#twitter"></use></svg>
                             ارسال مجدد کد چهار رقمی
                         </button>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>

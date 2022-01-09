@@ -456,6 +456,7 @@ namespace Shekayat.admin
                     string _threadid = GridView1.SelectedRow.Cells[1].Text;
                     threadid = Convert.ToInt64(_threadid);
                     threadid_client = threadid;
+                    
                     // get selected thread is seen from selected row
                     CheckBox _isseen = (CheckBox)GridView1.SelectedRow.Cells[8].Controls[0];
                     if (_isseen.Checked)
@@ -476,7 +477,12 @@ namespace Shekayat.admin
                         ShekayatTableAdapters.threadsTableAdapter _ta = new ShekayatTableAdapters.threadsTableAdapter();
                         _ta.UpdateIsSeenByThreadID(true, threadid);
                         // log thread's first seen by admin
-                        logs.CreateLog(-1, adminid, 27, "اولین نمایش شکایت توسط مدیر:", adminid.ToString(), Convert.ToInt32(threadid), threadid.ToString());
+                        logs.CreateLog(-1, adminid, 27, "اولین نمایش شکایت توسط مدیر:"+ threadsubject_client,"ادمین:"+ adminid.ToString(), Convert.ToInt32(threadid), "شکایت:"+threadid.ToString());
+                    }
+                    else
+                    {
+                        int adminid = Convert.ToInt32(SessionHelpers.GetSession("adminid", true));
+                        logs.CreateLog(-1, adminid, 21, "باز کردن شکایت توسط مدیر:"+ threadsubject_client, "ادمین:" + adminid.ToString(), Convert.ToInt32(threadid), "شکایت:" + threadid.ToString());
                     }
                 }
                 Repeater1.DataBind();
@@ -518,7 +524,7 @@ namespace Shekayat.admin
             {
                 string _threadid = GridView1.SelectedRow.Cells[1].Text;
                 threadid = Convert.ToInt64(_threadid);
-
+                
                 last_dep_text = GridView1.SelectedRow.Cells[18].Text;
             }
 
@@ -677,8 +683,11 @@ namespace Shekayat.admin
                 fixedtoken = _ttDT.Rows[0]["thread_fixed_token"].ToString();
             }
 
-
-            verifier.SendSMS("پاسخ شکایت شما در سامانه شکایات مردمی ارسال شد. \n کد پیگیری:" + fixedtoken + " \n http://roostaa.ir", themobile);
+            if (themobile!="ناشناس")
+            {
+                verifier.SendSMS("پاسخ شکایت شما در سامانه شکایات مردمی ارسال شد. \n کد پیگیری:" + fixedtoken + " \n http://roostaa.ir", themobile);
+            }
+            
 
             // end sms send
 

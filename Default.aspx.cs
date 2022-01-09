@@ -14,7 +14,7 @@ namespace Shekayat
         ShekayatTableAdapters.clientsTableAdapter clientsTA = new ShekayatTableAdapters.clientsTableAdapter();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void discontentByMobile_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace Shekayat
             Shekayat.thread_fixed_tokensDataTable threadtokensDT = threadtokensTA.GetDataByFixedToken(token.Text.ToLower());
 
             string _threadid = "-1";
-            if (threadtokensDT.Rows.Count<1)
+            if (threadtokensDT.Rows.Count < 1)
             {
                 return;
             }
@@ -86,7 +86,7 @@ namespace Shekayat
             }
 
 
-            
+
 
             ShekayatTableAdapters.threadsTableAdapter threadTA = new ShekayatTableAdapters.threadsTableAdapter();
             Shekayat.threadsDataTable threadDT = threadTA.GetThreadByThreadID(Convert.ToInt64(_threadid));
@@ -113,8 +113,16 @@ namespace Shekayat
                     Session["mobile"] = clientDT.Rows[0]["mobile"].ToString();
                     Session["newthread"] = "-1";
                     Session["bymobile"] = "-1";
-
-                    Response.Redirect("/verifier.aspx", true);
+                    if (Session["mobile"].ToString()=="ناشناس")
+                    {
+                        logs.CreateLog(Convert.ToInt32(Session["userid"]), -1, 38, "ورود موفق شاکی با کد پیگیری:" + Session["userid"], "ناشناس", -1, " ");
+                        Response.Redirect("/thread.aspx", true);
+                    }
+                    else
+                    {
+                        Response.Redirect("/verifier.aspx", true);
+                    }
+                    
                 }
                 else
                 {
@@ -147,24 +155,24 @@ namespace Shekayat
                 if (clients.Rows.Count > 0)
                 {
                     // client has records
-                    clientsTA.UpdateClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, Convert.ToDateTime(clients.Rows[0]["creationdate"]), DateTime.Now, true, token.ToString(),NationalCode.Text, InsuranceCode.Text ,Convert.ToInt64(clients.Rows[0]["userid"]));
+                    clientsTA.UpdateClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, Convert.ToDateTime(clients.Rows[0]["creationdate"]), DateTime.Now, true, token.ToString(), NationalCode.Text, InsuranceCode.Text, Convert.ToInt64(clients.Rows[0]["userid"]));
                     Session["userid"] = clients.Rows[0]["userid"];
                 }
                 else
                 {
                     // new client
-                    object identity = clientsTA.InsertClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, DateTime.Now, DateTime.Now, true, token.ToString(),NationalCode.Text,InsuranceCode.Text);
-                    if (Convert.ToInt32(identity)==1)
+                    object identity = clientsTA.InsertClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, DateTime.Now, DateTime.Now, true, token.ToString(), NationalCode.Text, InsuranceCode.Text);
+                    if (Convert.ToInt32(identity) == 1)
                     {
                         clients = clientsTA.GetClientsByMobile(mobile.Text);
-                        if (clients.Rows.Count>0)
+                        if (clients.Rows.Count > 0)
                         {
                             Session["userid"] = clients.Rows[0]["userid"];
                             logs.CreateLog(Convert.ToInt32(identity), -1, 6, "شاکی جدید:" + mobile.Text, firstName.Text + " " + lastName.Text, -1, Province.SelectedItem.Text + "," + city.Text);
                         }
                     }
-                    
-                    
+
+
                 }
 
                 Session["tokenerrors"] = 4; // token error count reset
@@ -174,6 +182,50 @@ namespace Shekayat
                 Response.Redirect("/verifier.aspx", true);
                 //Server.Transfer("/verifier.aspx", true);
             }
+        }
+        protected void unknownDiscontent_Click(object sender, EventArgs e)
+        {
+
+            // search for client with mobile number
+            //Shekayat.clientsDataTable clients = clientsTA.GetClientsByMobile(mobile.Text);
+            Shekayat.clientsDataTable clients = new Shekayat.clientsDataTable();
+
+            // generate new random token
+            var rnd = new Random(DateTime.Now.Millisecond);
+            int token = rnd.Next(1000, 9999);
+
+            // check if client has records or not
+            //if (clients.Rows.Count > 0)
+            //{
+            //    // client has records
+            //    clientsTA.UpdateClient(firstName.Text, lastName.Text, mobile.Text, Convert.ToInt32(Province.SelectedValue), city.Text, Convert.ToDateTime(clients.Rows[0]["creationdate"]), DateTime.Now, true, token.ToString(), NationalCode.Text, InsuranceCode.Text, Convert.ToInt64(clients.Rows[0]["userid"]));
+            //    Session["userid"] = clients.Rows[0]["userid"];
+            //}
+            //else
+            //{
+            // new client
+            object identity = clientsTA.InsertUnknown("ناشناس", "ناشناس", "ناشناس", 32, "ناشناس", DateTime.Now, DateTime.Now, true, token.ToString(), "ناشناس", "ناشناس");
+            if (Convert.ToInt32(identity) > 0)
+            {
+                clients = clientsTA.GetClientByClientID(Convert.ToInt64(identity));
+                if (clients.Rows.Count > 0)
+                {
+                    Session["userid"] = clients.Rows[0]["userid"];
+                    logs.CreateLog(Convert.ToInt32(identity), -1, 37, "شاکی ناشناس جدید:" + Session["userid"], "ناشناس", -1, " ");
+                }
+            }
+
+
+            //}
+
+            Session["tokenerrors"] = 4; // token error count reset
+            Session["token"] = token;
+            Session["mobile"] = "";
+            Session["newthread"] = "1";
+            //logs.CreateLog(Convert.ToInt32(identity), -1, 1, "ورود شاکی ناشناس", "token:" + Session["token"], -1, "");
+            Response.Redirect("/newdiscontent.aspx", true);
+            //Server.Transfer("/verifier.aspx", true);
+
         }
 
 

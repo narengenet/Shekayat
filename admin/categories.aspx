@@ -268,8 +268,8 @@
         function showErrorCreateDep(error_permision) {
             $('.toast-header').addClass('bg-danger');
             $('#toasttitle').addClass('text-white');
-            $("#toasttitle").html('نام دسته بندی تکراری');
-            $('#toastbody').html('نام دسته بندی جدیدی که وارد کرده اید قبلا استفاده شده است. لطفا نام دیگری انتخاب کنید.');
+            $("#toasttitle").html('نام دپارتمان تکراری');
+            $('#toastbody').html('نام دپارتمان جدیدی که وارد کرده اید قبلا استفاده شده است. لطفا نام دیگری انتخاب کنید.');
             $('.toast').toast('show');
         }
 
@@ -281,7 +281,7 @@
             $('.toast-header').addClass('bg-success');
             $('#toasttitle').addClass('text-white');
             $("#toasttitle").html('ثبت موفق');
-            $('#toastbody').html('دسته بندی جدید با موفقیت ثبت شد.');
+            $('#toastbody').html('دپارتمان جدید با موفقیت ثبت شد.');
             $('.toast').toast('show');
         }
 
@@ -305,8 +305,8 @@
         }
         function deleteDepAsk() {
 
-            $('#myModalTitle').html('حذف دسته بندی');
-            $('#myModalBody').html('تمامی شکایات مربوط به این دسته بندی از این دسته بندی خارج خواهند شد. مطمئن هستید که میخواهید این دسته بندی را حذف کنید؟');
+            $('#myModalTitle').html('حذف دپارتمان');
+            $('#myModalBody').html('تمامی شکایات مربوط به این دپارتمان از این دپارتمان خارج خواهند شد و کلیه موضوعات مربوط به این دپارتمان نیز حذف خواهند شد. مطمئن هستید که میخواهید این دپارتمان را حذف کنید؟');
             $('#myModalClose').html('خیر');
             $('#myModalOk').html('بله. حذف شود');
 
@@ -317,7 +317,7 @@
             $('.toast-header').addClass('bg-success');
             $('#toasttitle').addClass('text-white');
             $("#toasttitle").html('حذف موفق');
-            $('#toastbody').html('دسته بندی با موفقیت حذف شد.');
+            $('#toastbody').html('دپارتمان با موفقیت حذف شد.');
             $('.toast').toast('show');
         }
 
@@ -334,7 +334,7 @@
             $('.toast-header').addClass('bg-success');
             $('#toasttitle').addClass('text-white');
             $("#toasttitle").html('ویرایش موفق');
-            $('#toastbody').html('دسته بندی با موفقیت ویرایش شد.');
+            $('#toastbody').html('دپارتمان با موفقیت ویرایش شد.');
             $('.toast').toast('show');
         }
 

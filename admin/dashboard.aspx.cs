@@ -16,8 +16,8 @@ namespace Shekayat.admin
         public int score3 = 4;
         public int score4 = 5;
         public int score5 = 6;
-        public int[] states = new int[31];
-        public string[] state_names = new string[31];
+        public int[] states = new int[32];
+        public string[] state_names = new string[32];
         protected void Page_Load(object sender, EventArgs e)
         {
             ShekayatTableAdapters.clientsTableAdapter clientsTA = new ShekayatTableAdapters.clientsTableAdapter();

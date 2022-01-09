@@ -22,6 +22,9 @@
             <button class="nav-link home active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ثبت شکایت جدید</button>
         </li>
         <li class="nav-item" role="presentation">
+            <button class="nav-link home" id="unknown-tab" data-bs-toggle="tab" data-bs-target="#unknown" type="button" role="tab" aria-controls="unknown" aria-selected="false">ثبت شکایت ناشناس</button>
+        </li>
+        <li class="nav-item" role="presentation">
             <button class="nav-link home" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">پیگیری شکایت</button>
         </li>
         <%--        <li class="nav-item" role="presentation">
@@ -133,6 +136,26 @@
                 </div>
             </div>
 
+        </div>
+        <div class="tab-pane fade" id="unknown" role="tabpanel" aria-labelledby="unknown-tab">
+            <div class="card mb-4 rounded-3 shadow-sm border-top-0 back-card-b">
+                <div class="card-body">
+                    <div class="row align-items-center text-center mb-3">
+                        <label class="form-label text-danger fw-bold">* برای ثبت شکایت به صورت ناشناس نیازی به مدارک شناسایی شما نیست. کد پیگیری شکایت تنها راه پیگیری شماست. لطفا پس از ثبت شکایت حتما کد پیگیری را یادداشت نمایید.</label>
+                    </div>
+
+                    <div class="needs-validation mt-2">
+                        <div class="row g-3">
+                            <div class="col-sm-12 col-md-13 border rounded p-2 back-card-c">
+                                <asp:Panel ID="Panel2" runat="server" DefaultButton="discontentUnknown">
+                                    <asp:Button ID="discontentUnknown" runat="server" CssClass="w-100 btn btn-lg btn-info mt-2" Text="ادامه" OnClick="unknownDiscontent_Click" />
+
+                                </asp:Panel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="card mb-4 rounded-3 shadow-sm border-top-0 back-card-b">

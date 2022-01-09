@@ -180,7 +180,8 @@ GROUP BY clients.state_id, states.state_name"></asp:SqlDataSource>
                             { label: "<%= state_names[27].ToString() %>", y: parseInt('<%= states[27].ToString() %>') },
                             { label: "<%= state_names[28].ToString() %>", y: parseInt('<%= states[28].ToString() %>') },
                             { label: "<%= state_names[29].ToString() %>", y: parseInt('<%= states[29].ToString() %>') },
-                            { label: "<%= state_names[30].ToString() %>", y: parseInt('<%= states[30].ToString() %>') }
+                            { label: "<%= state_names[30].ToString() %>", y: parseInt('<%= states[30].ToString() %>') },
+                            { label: "<%= state_names[31].ToString() %>", y: parseInt('<%= states[31].ToString() %>') }
                         ]
                     }]
                 };

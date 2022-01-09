@@ -108,8 +108,9 @@
             </asp:GridView>
             <asp:SqlDataSource ID="Threads" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT DISTINCT threads.thread_id, threads.subject, threads.creationdate, threads.iscompleted, threads.isclosed, threads.score, threads.seen, threads.replied, threads.department_id, clients.name, clients.family, states.state_name, threads.userid, states.state_id, clients.mobile, clients.city, departments.name AS Expr1, clients.national_code, clients.insurance_code, threads.replydate, thread_fixed_tokens.thread_fixed_token FROM states INNER JOIN clients ON states.state_id = clients.state_id INNER JOIN threads ON clients.userid = threads.userid INNER JOIN thread_fixed_tokens ON threads.thread_id = thread_fixed_tokens.thread_id LEFT OUTER JOIN posts ON threads.thread_id = posts.thread_id LEFT OUTER JOIN departments ON threads.department_id = departments.department_id ORDER BY threads.creationdate DESC" OnSelected="Threads_Selected"></asp:SqlDataSource>
         </div>
-        <div class="p-1 text-muted" style="text-align:center;font-size:0.7rem;font-weight:bold;border:solid 1px black;border-radius:8px;margin:1rem;">
-            تعداد کل <asp:Label runat="server" ID="countall"></asp:Label>
+        <div class="p-1 text-muted" style="text-align: center; font-size: 0.7rem; font-weight: bold; border: solid 1px black; border-radius: 8px; margin: 1rem;">
+            تعداد کل
+            <asp:Label runat="server" ID="countall"></asp:Label>
         </div>
 
         <div class="align-items-stretch p-1 bg-warning" id="editThreadContainer" style="margin-right: .4rem; margin-bottom: .4rem;">
@@ -165,7 +166,7 @@
                             <%--<div class="subject-parent">
                                 <h3 class="subject-header"></h3>
                             </div>--%>
-                        <hr style="height:5px;margin-top:0.5rem;background-color:black;border-radius:10px;" />
+                        <hr style="height: 5px; margin-top: 0.5rem; background-color: black; border-radius: 10px;" />
                         <label class="form-label">متن پیام (ها)</label>
                 </HeaderTemplate>
                 <ItemTemplate>
@@ -177,12 +178,16 @@
                             پیام کاربر
                         </div>
                         <div class='col-sm-6 post-<%#Eval("postid").ToString()%> <%#Eval("isvoice").ToString()=="True" ? "":"d-none"%> <%#Eval("isreply").ToString()=="True" ? "is-not-reply":"is-reply"%>'>
+                            <span class="text-muted <%#Eval("isreply").ToString()=="True" ? "":"d-none"%> <%#Eval("isread").ToString()=="True" ? "":"d-none"%>" style="color: chartreuse!important; background-color: darkgreen; padding: 5px; border-radius: 10px; margin-bottom: 10px; display: block; width: 100%; text-align: center;font-size:0.8rem;">✔✔ملاحظه شده توسط شاکی در  <%# Eval("firstseendate")== null ? "":DateTime.Parse(Eval("firstseendate").ToString()).ToString("f")  %> 	</span>
+                            <span class="text-muted <%#Eval("isreply").ToString()=="True" ? "":"d-none"%> <%#Eval("isread").ToString()=="True" ? "d-none":""%>" style="color: dimgray!important; background-color: lightgray; padding: 5px; border-radius: 10px; margin-bottom: 10px; display: block; width: 25%; text-align: center;"> هنوز ملاحظه نشده </span>
                             <audio controls>
                                 <source src='../<%# Eval("voice") %>' type='audio/wav'>
                                 امکان پخش این فایل صوتی برای مرورگر شما وجود ندارد.
                             </audio>
                         </div>
                         <div class='col-sm-6 post-<%#Eval("postid").ToString()%> <%#Eval("isvoice").ToString()=="True" ? "d-none":""%> <%#Eval("isreply").ToString()=="True" ? "is-not-reply":"is-reply"%>'>
+                            <span class="text-muted <%#Eval("isreply").ToString()=="True" ? "":"d-none"%> <%#Eval("isread").ToString()=="True" ? "":"d-none"%>" style="color: chartreuse!important; background-color: darkgreen; padding: 5px; border-radius: 10px; margin-bottom: 10px; display: block; width: 100%; text-align: center;font-size:0.8rem;">✔✔ملاحظه شده توسط شاکی در  <%#Eval("firstseendate")== null ? "":DateTime.Parse(Eval("firstseendate").ToString()).ToString("f")  %> 	</span>
+                            <span class="text-muted <%#Eval("isreply").ToString()=="True" ? "":"d-none"%> <%#Eval("isread").ToString()=="True" ? "d-none":""%>" style="color: dimgray!important; background-color: lightgray; padding: 5px; border-radius: 10px; margin-bottom: 10px; display: block; width: 25%; text-align: center;"> هنوز ملاحظه نشده </span>                            
                             <div class="form-label"><%# Eval("text") %></div>
                         </div>
                         <div class="col-sm-5 align-content-end post-<%#Eval("postid").ToString()%>">

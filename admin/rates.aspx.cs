@@ -37,7 +37,7 @@ namespace Shekayat.admin
             {
                 bindData();
             }
-            
+
             //if (!Page.IsPostBack)
             //{
             //    bindData();
@@ -64,7 +64,7 @@ namespace Shekayat.admin
 
         protected void DropDownList2_DataBound(object sender, EventArgs e)
         {
-            DropDownList2.Items.Insert(0, new ListItem("همه", "2"));
+            DropDownList2.Items.Insert(0, new ListItem("همه", "0"));
         }
 
         protected void SqlDataSource3_Selected(object sender, SqlDataSourceStatusEventArgs e)
@@ -75,7 +75,7 @@ namespace Shekayat.admin
         //---- Bind data in GridView.
         public void bindData()
         {
-            
+
             //--- Getting connection string defined in the web.config file. Pointed to the database we want to use.
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["shekayatConnectionString"].ConnectionString);
             string cmdText = "SELECT threads.thread_id AS 'شناسه شکایت', clients.name AS نام, clients.family AS 'نام خانوادگی' ,threads.creationdate AS تاریخ, states.state_name AS استان, clients.city AS شهر, departments.name AS دپارتمان,threads.score AS امتیاز , clients.mobile AS 'تلفن همراه',threads.subject AS 'موضوع شکایت'  FROM  clients INNER JOIN  threads ON clients.userid = threads.userid INNER JOIN departments ON threads.department_id = departments.department_id INNER JOIN states ON clients.state_id = states.state_id WHERE (1=1) ";
@@ -91,19 +91,27 @@ namespace Shekayat.admin
 
             if (DropDownList2.SelectedValue.Length > 0)
             {
-                if (DropDownList2.SelectedValue != "2")
+                if (DropDownList2.SelectedValue != "0")
                 {
                     cmdText += "AND (threads.department_id = " + DropDownList2.SelectedValue + ")";
                 }
             }
 
-            if (txtFromDate.Text.Length>1)
+            if (DropDownList3.SelectedValue.Length > 0)
+            {
+                if (DropDownList3.SelectedValue != "0")
+                {
+                    cmdText += "AND (threads.subject = N'"+ DropDownList3.SelectedValue + "')";
+                }
+            }
+
+            if (txtFromDate.Text.Length > 1)
             {
                 var p = new System.Globalization.PersianCalendar();
                 string PersianDate1 = txtFromDate.Text;
                 string[] parts = PersianDate1.Split('/', '-');
                 DateTime dta1 = p.ToDateTime(Convert.ToInt32(parts[0]), Convert.ToInt32(parts[1]), Convert.ToInt32(parts[2]), 0, 0, 0, 0);
-                cmdText += "AND (threads.creationdate > '"+dta1.Month.ToString()+"/"+dta1.Day.ToString()+"/"+dta1.Year.ToString()+"')";
+                cmdText += "AND (threads.creationdate > '" + dta1.Month.ToString() + "/" + dta1.Day.ToString() + "/" + dta1.Year.ToString() + "')";
             }
 
             if (txtToDate.Text.Length > 1)
@@ -175,7 +183,7 @@ namespace Shekayat.admin
                 ScoreSum.Text = (scores / (Convert.ToInt32(threadCounts.Text))).ToString();
                 if (ScoreSum.Text.Contains("."))
                 {
-                    
+
                 }
             }
             else
@@ -211,7 +219,7 @@ namespace Shekayat.admin
             logs.CreateLog(-1, adminid, 34, "Excel", "خروج موفق اکسل", 0, "");
             Response.Write(sw.ToString());
             Response.End();
-            
+
         }
 
 
@@ -221,5 +229,10 @@ namespace Shekayat.admin
             /* Verifies that the control is rendered */
         }
 
+        protected void DropDownList3_DataBound(object sender, EventArgs e)
+        {
+            DropDownList3.Items.Insert(0, new ListItem("همه", "0"));
+
+        }
     }
 }

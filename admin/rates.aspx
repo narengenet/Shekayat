@@ -37,7 +37,15 @@
                 <asp:DropDownList ID="DropDownList2" CssClass="form-select w-50 bold-smal-text inline-48" runat="server" DataSourceID="SqlDataSource2" DataTextField="name" DataValueField="department_id" AutoPostBack="True" OnDataBound="DropDownList2_DataBound">
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT * FROM [departments]"></asp:SqlDataSource>
-
+                <br />
+                <asp:Label Text="موضوع شکایت" runat="server" AssociatedControlID="DropDownList3" CssClass="form-label inline-48"></asp:Label>
+                <asp:DropDownList ID="DropDownList3" CssClass="form-select w-50 bold-smal-text inline-48" runat="server" DataSourceID="SqlDataSource4" DataTextField="subject_text" DataValueField="subject_text" AutoPostBack="True" OnDataBound="DropDownList3_DataBound">
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:shekayatConnectionString %>" SelectCommand="SELECT * FROM [departments_subjects] WHERE ([department_id] = @department_id)">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="DropDownList2" Name="department_id" PropertyName="SelectedValue" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </div>
 
 
@@ -72,39 +80,40 @@
 
         <div class="d-flex flex-row p-3 text-center">
             تعداد شکایات : &nbsp;<asp:Label ID="threadCounts" runat="server" CssClass="form-label text-primary"></asp:Label>&nbsp;<span class="text-primary">شکایت</span>
-            <hr />&nbsp;,
+            <hr />
+            &nbsp;,
             میانگین سطح رضایت : &nbsp;<asp:Label ID="ScoreSum" runat="server" CssClass="form-label text-secondary"></asp:Label>&nbsp;<span class="text-secondary"> از 5</span>
 
 
 
-                <div class="d-flex flex-row align-items-right" style="margin-right: 1rem;margin-top:-0.4rem;">
-                    <label class="form-label bold-smal-text pt-2">خروجی:</label>
-                    <asp:Button ID="Button2" runat="server" UseSubmitBehavior="false" CssClass="btn-export btn-excel" Text=" " TabIndex="10" OnClick="Button2_Click" />
-                    &nbsp;
+            <div class="d-flex flex-row align-items-right" style="margin-right: 1rem; margin-top: -0.4rem;">
+                <label class="form-label bold-smal-text pt-2">خروجی:</label>
+                <asp:Button ID="Button2" runat="server" UseSubmitBehavior="false" CssClass="btn-export btn-excel" Text=" " TabIndex="10" OnClick="Button2_Click" />
+                &nbsp;
                     <span class="btn-export btn-chrt" onclick="exportChrt();">&nbsp;</span>
-                    <%--<asp:Button ID="Button3" runat="server" CssClass="btn-export btn-pdf" Text=" " OnClick="Button3_Click"  />--%><%--<asp:Button ID="Button3" runat="server" CssClass="btn-export btn-pdf" Text=" " OnClick="Button3_Click"  />--%>
-                </div>
+                <%--<asp:Button ID="Button3" runat="server" CssClass="btn-export btn-pdf" Text=" " OnClick="Button3_Click"  />--%><%--<asp:Button ID="Button3" runat="server" CssClass="btn-export btn-pdf" Text=" " OnClick="Button3_Click"  />--%>
+            </div>
 
         </div>
         <div class="d-flex flex-row p-3 text-center">
-            <div style="margin:auto;width:50%;">
-            <asp:GridView ID="GridView1" runat="server" CellPadding="4" CssClass="grid-data" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White" />
-                <EditRowStyle BackColor="#7C6F57" />
-                <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#E3EAEB" />
-                <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F8FAFA" />
-                <SortedAscendingHeaderStyle BackColor="#246B61" />
-                <SortedDescendingCellStyle BackColor="#D4DFE1" />
-                <SortedDescendingHeaderStyle BackColor="#15524A" />
-            </asp:GridView>
-                </div>
-            
+            <div style="margin: auto; width: 50%;">
+                <asp:GridView ID="GridView1" runat="server" CellPadding="4" CssClass="grid-data" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" />
+                    <EditRowStyle BackColor="#7C6F57" />
+                    <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#E3EAEB" />
+                    <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+                    <SortedAscendingCellStyle BackColor="#F8FAFA" />
+                    <SortedAscendingHeaderStyle BackColor="#246B61" />
+                    <SortedDescendingCellStyle BackColor="#D4DFE1" />
+                    <SortedDescendingHeaderStyle BackColor="#15524A" />
+                </asp:GridView>
+            </div>
+
             <div id="chartContainer" style="height: 370px; width: 50%;"></div>
-            
+
         </div>
 
 
@@ -160,18 +169,18 @@
                         type: "column",
                         dataPoints: [
                             { label: "بدون نظر", y: parseInt(score0) },
-                            
-                            
-                            
-                            
+
+
+
+
                             { label: "خیلی خوب", y: parseInt(score5) },
                             { label: "خوب", y: parseInt(score4) },
                             { label: "متوسط", y: parseInt(score3) },
                             { label: "بد", y: parseInt(score2) },
                             { label: "خیلی بد", y: parseInt(score1) }
-                            
-                            
-                            
+
+
+
 
 
                         ]

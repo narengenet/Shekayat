@@ -20,7 +20,7 @@ namespace Shekayat.handlers
 
 
 
-            if (PermissionChecks.CheckPermission(10, Convert.ToInt32(_adminid)))
+            if (PermissionChecks.CheckPermission(10, Convert.ToInt32(_adminid)) && _depid!="2")
             {
 
                 int adminid = Convert.ToInt32(_adminid);
@@ -28,13 +28,16 @@ namespace Shekayat.handlers
                 ShekayatTableAdapters.departmentsTableAdapter depTA = new ShekayatTableAdapters.departmentsTableAdapter();
                 Shekayat.departmentsDataTable depDT = new Shekayat.departmentsDataTable();
                 ShekayatTableAdapters.threadsTableAdapter threadTA = new ShekayatTableAdapters.threadsTableAdapter();
+                ShekayatTableAdapters.departments_subjectsTableAdapter subjectTA = new ShekayatTableAdapters.departments_subjectsTableAdapter();
 
                 depDT= depTA.GetDepartmentByDepID(depid);
                 if (depDT.Rows.Count>0)
                 {
                     string depName = depDT.Rows[0]["name"].ToString();
                     // change threat's dep relevant to this dep to null dep
-                    threadTA.UpdateDepIDByDepID(-1, depid);
+                    threadTA.UpdateDepIDByDepID(2, depid);
+                    // delete subjects related to this dep
+                    subjectTA.DeleteByDepID(depid);
                     // delete dep
                     result = depTA.DeleteDepByID(depid);
                     

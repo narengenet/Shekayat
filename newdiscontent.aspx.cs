@@ -78,8 +78,16 @@ namespace Shekayat
                 int dep_id = 2;
                 if (DropDownList1.SelectedValue!="-2")
                 {
-                    dep_id = Convert.ToInt32(DropDownList1.SelectedValue);
+                    // set department id of thread by selected subject
+                    int sub_id = Convert.ToInt32(DropDownList1.SelectedValue);
+                    ShekayatTableAdapters.departments_subjectsTableAdapter subjTA = new ShekayatTableAdapters.departments_subjectsTableAdapter();
+                    Shekayat.departments_subjectsDataTable subjDT=subjTA.GetDataBySubjectID(sub_id);
+                    if (subjDT.Rows.Count>0)
+                    {
+                        dep_id = Convert.ToInt32(subjDT[0]["department_id"]);
+                    }
                 }
+                // update thread's subject and department 
                 threadTA.UpdateSubmitThread(subject.Text, dep_id,Convert.ToInt64(Session["threadid"]));
 
                 Response.Redirect("/discontentresult.aspx", true);
