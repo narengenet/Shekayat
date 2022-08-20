@@ -1,5 +1,5 @@
 # Shekayat
-Public Complaint System for Iran,Ministry of Cooperatives Labour and Social Welfare
+Public Complaint System for Iran's Ministry of Cooperatives Labour and Social Welfare
 
 This System is a public complaint system for them who have any complaint from relavant ministry. 
 Complainants can register their complaint eighter by their cell-phone or as unknown.
